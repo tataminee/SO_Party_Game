@@ -1,9 +1,16 @@
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import JoinRoom from "./pages/JoinRoom";
+import CreateRoom from "./pages/CreateRoom";
+import Lobby from "./pages/Lobby";
+
 export default function App() {
   return (
-    <div className="min-h-screen bg-blue-700 flex items-center justify-center">
-      <button className="bg-yellow-400 text-blue-900 font-bold rounded-2xl px-10 py-4">
-        TES TOMBOL
-      </button>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/join" element={<JoinRoom />} />
+      <Route path="/create" element={<CreateRoom />} />
+      <Route path="/lobby/:code" element={<Lobby />} />
+    </Routes>
   );
 }
