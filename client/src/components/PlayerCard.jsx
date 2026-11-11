@@ -1,4 +1,3 @@
-// Stickman sementara. Nanti ganti dengan SVG dari Figma.
 function Stickman({ className }) {
   return (
     <svg viewBox="0 0 64 96" className={`h-24 ${className}`} fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round">
@@ -8,17 +7,22 @@ function Stickman({ className }) {
   );
 }
 
-const colorClass = { pink: "text-pink-500", blue: "text-sky-400", orange: "text-orange-400" };
+const colorClass = {
+  pink: "text-pink-500",
+  blue: "text-sky-400",
+  orange: "text-orange-400",
+  yellow: "text-yellow-400",
+};
 
-export default function PlayerCard({ player, isHost, isMe, canKick, onKick }) {
+export default function PlayerCard({ player, isMe, canKick, onKick }) {
   return (
     <div className="relative flex flex-col items-center rounded-2xl border-2 border-white/40 bg-white/15 px-2 pb-3 pt-8">
-      {isHost && (
+      {player.isHost && (
         <span className="absolute left-2 top-2 rounded-md bg-brand-yellow px-2 text-[10px] font-extrabold text-brand-dark">
-          👑 HOST
+          HOST
         </span>
       )}
-      {isMe && (
+      {isMe && !canKick && (
         <span className="absolute right-2 top-2 rounded-md bg-white px-2 text-[10px] font-extrabold text-brand-dark">
           KAMU
         </span>
@@ -33,15 +37,15 @@ export default function PlayerCard({ player, isHost, isMe, canKick, onKick }) {
         </button>
       )}
 
-      <Stickman className={colorClass[player.color]} />
+      <Stickman className={colorClass[player.avatarColor]} />
 
       <p className="mt-2 rounded-full bg-brand-dark px-4 py-0.5 text-xs font-bold text-white">{player.name}</p>
       <p
         className={`mt-2 rounded-full border-2 border-brand-dark px-4 py-0.5 text-[11px] font-extrabold ${
-          player.ready ? "bg-brand-yellow text-brand-dark" : "bg-slate-200 text-slate-500"
+          player.isReady ? "bg-brand-yellow text-brand-dark" : "bg-slate-200 text-slate-500"
         }`}
       >
-        {player.ready ? "SIAP" : "MENUNGGU"}
+        {player.isReady ? "SIAP" : "MENUNGGU"}
       </p>
     </div>
   );
